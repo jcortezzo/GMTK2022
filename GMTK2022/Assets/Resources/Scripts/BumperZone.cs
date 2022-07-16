@@ -117,7 +117,7 @@ public class BumperZone : MonoBehaviour
         }
         foreach (DiePositions position in positions)
         {
-            Vector2 spawnPos = new Vector2(this.transform.position.x, this.transform.position.y) + GetCoordsFromPosition(position);
+            Vector2 spawnPos = GetCoordsFromPosition(position);
             spawnPos = transform.TransformPoint(spawnPos);
             GameObject bumper = Instantiate(BUMPER_PREFAB, spawnPos, Quaternion.identity, this.transform);
             Bumpers.Add(bumper);
