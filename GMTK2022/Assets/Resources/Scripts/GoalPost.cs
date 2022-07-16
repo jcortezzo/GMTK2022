@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GoalPost : MonoBehaviour
 {
+    public CameraShake camShake;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class GoalPost : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ball"))
         {
+            camShake.TriggerShake(0.1f);
             Destroy(collision.gameObject);
         }
     }
