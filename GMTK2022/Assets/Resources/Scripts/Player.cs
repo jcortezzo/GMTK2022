@@ -43,6 +43,12 @@ public class Player : MonoBehaviour
         Move();
     }
 
+    public void UpdateBumper(int n)
+    {
+        bumperZone.GenerateBumperFormation(n);
+    }
+
+
     void Move()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
