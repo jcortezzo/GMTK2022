@@ -6,6 +6,7 @@ public class GameCoordinator : MonoBehaviour
 {
     public StaminaBar staminaBar;
     public Player player;
+    public int Lives { get; private set; }
     void Start()
     {
         
@@ -15,6 +16,16 @@ public class GameCoordinator : MonoBehaviour
     void Update()
     {
         staminaBar.DecreaseStamina(Time.deltaTime * 10);
+    }
+
+    public void Hurt()
+    {
+        Lives = Mathf.Max(Lives - 1, 0);
+    }
+
+    public bool IsDead()
+    {
+        return Lives <= 0;
     }
 
     public void SimulateRollDice()

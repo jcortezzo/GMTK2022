@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1130761605116834682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac50ca714bc3446f49e54c8e0f41d4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BumpForce>k__BackingField: 2
+  <BumpForce>k__BackingField: 5
 --- !u!50 &-1884294776508284633
 Rigidbody2D:
   serializedVersion: 4
@@ -164,4 +164,4 @@ MonoBehaviour:
   - {x: 0.1, y: -0.1, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 64380
+  m_InstanceId: 56162
