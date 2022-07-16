@@ -21,7 +21,7 @@ public class GoalPost : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ball"))
         {
-            camShake.TriggerShake(0.1f);
+            camShake.TriggerShake(0.2f);
             Destroy(collision.gameObject);
         }
     }

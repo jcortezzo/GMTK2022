@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1130761605116834682}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac50ca714bc3446f49e54c8e0f41d4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BumpForce>k__BackingField: 2
+  <BumpForce>k__BackingField: 5
 --- !u!50 &-1884294776508284633
 Rigidbody2D:
   serializedVersion: 4
@@ -158,18 +158,10 @@ MonoBehaviour:
   m_SelfShadows: 1
   m_ApplyToSortingLayers: 00000000
   m_ShapePath:
-  - {x: -0.06068083, y: -0.072695024, z: 0}
-  - {x: -0.08436889, y: -0.034642287, z: 0}
-  - {x: -0.08655329, y: 0.022152089, z: 0}
-  - {x: -0.05577638, y: 0.07280301, z: 0}
-  - {x: 0.0008226689, y: 0.09423726, z: 0}
-  - {x: 0.057620242, y: 0.07613361, z: 0}
-  - {x: 0.07946103, y: 0.03744288, z: 0}
-  - {x: 0.091475226, y: -0.005152898, z: 0}
-  - {x: 0.08273763, y: -0.039011084, z: 0}
-  - {x: 0.06723402, y: -0.05958862, z: 0}
-  - {x: 0.040141847, y: -0.08051466, z: 0}
-  - {x: -0.009007125, y: -0.09252885, z: 0}
-  m_ShapePathHash: -735322330
+  - {x: -0.1, y: -0.1, z: 0}
+  - {x: -0.1, y: 0.1, z: 0}
+  - {x: 0.1, y: 0.1, z: 0}
+  - {x: 0.1, y: -0.1, z: 0}
+  m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 76036
+  m_InstanceId: 56162
