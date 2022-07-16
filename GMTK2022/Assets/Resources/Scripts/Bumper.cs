@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Bumper : MonoBehaviour
 {
+    public bool IsCharged { get; set; }
+
+    [field:SerializeField]
+    public float BumpForce { get; set; }
     // Start is called before the first frame update
     void Start()
     {

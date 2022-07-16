@@ -44,6 +44,26 @@ public class BumperZone : MonoBehaviour
 
     }
 
+    public void ChargeBumpers()
+    {
+        ChangeBumperCharge(true);
+    }
+
+    public void UnchargeBumpers()
+    {
+        ChangeBumperCharge(false);
+    }
+
+    private void ChangeBumperCharge(bool isCharged)
+    {
+        foreach (GameObject bumper in Bumpers)
+        {
+            if (bumper == null || !bumper.activeInHierarchy) continue;
+            Bumper b = bumper.GetComponent<Bumper>();
+            b.IsCharged = isCharged;
+        }
+    }
+
     private void ClearPreviousBumpers()
     {
         foreach (GameObject bumper in Bumpers)

@@ -78,14 +78,18 @@ public class Player : MonoBehaviour
     public IEnumerator RotateLeft(float duration)
     {
         isSwinging = true;
+        bumperZone.ChargeBumpers();
         yield return Rotate(duration, 90);
+        bumperZone.UnchargeBumpers();
         isSwinging = false;
     }
 
     public IEnumerator RotateRight(float duration)
     {
         isSwinging = true;
+        bumperZone.ChargeBumpers();
         yield return Rotate(duration, -90);
+        bumperZone.UnchargeBumpers();
         isSwinging = false;
     }
 

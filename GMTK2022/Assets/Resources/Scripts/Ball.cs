@@ -32,9 +32,14 @@ public class Ball : MonoBehaviour
             Vector2 collisionPoint = collision.ClosestPoint(transform.position);
             Vector2 collisionNormal = new Vector2(transform.position.x, transform.position.y) - collisionPoint;
 
-            // TODO: Change to AddForce possibly, adjust on game feel
-            rb.velocity = collisionNormal.normalized * Speed;
-
+            if (bumper.IsCharged)
+            {
+                rb.AddForce(bumper.BumpForce * collisionNormal.normalized, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.velocity = collisionNormal.normalized * Speed;
+            }
 
             //// Below is the Jankies API....
             //ContactPoint2D[] contactPoints = new ContactPoint2D[20];  // ??? wtf
@@ -48,6 +53,14 @@ public class Ball : MonoBehaviour
             //    rb.velocity = contactPoint.normal.normalized * Speed;
             //    break;
             //}
+        }
+        else if (collision.gameObject.CompareTag("Wall"))
+        {
+            Vector2 collisionPoint = collision.ClosestPoint(transform.position);
+            Vector2 collisionNormal = new Vector2(transform.position.x, transform.position.y) - collisionPoint;
+
+            // TODO: Change to AddForce possibly, adjust on game feel
+            rb.velocity = collisionNormal.normalized * Speed;
         }
     }
 }
