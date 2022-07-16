@@ -214,6 +214,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1441641552636528751, guid: 62969b944fe5e4abd823e61f59e669d9, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1673191656129466684, guid: 62969b944fe5e4abd823e61f59e669d9, type: 3}
       propertyPath: <Size>k__BackingField
       value: 2

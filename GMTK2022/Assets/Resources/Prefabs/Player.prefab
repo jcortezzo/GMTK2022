@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 20000
+  <SwingSpeed>k__BackingField: 0.5
   BUMPER_PREFAB: {fileID: 0}
 --- !u!50 &1441641552636528751
 Rigidbody2D:
