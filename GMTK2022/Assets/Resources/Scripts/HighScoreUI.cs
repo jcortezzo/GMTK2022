@@ -17,6 +17,6 @@ public class HighScoreUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        highScoreText.text = $"Max balls on screen : {highScoreSO.value}";
+        highScoreText.text = $"High Score : {highScoreSO.value}";
     }
 }

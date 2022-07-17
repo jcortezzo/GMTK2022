@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Max balls on screen : '
+  m_text: 'High Score : '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 389dbadeda6cfd04a94675e57acf4dab, type: 2}
   m_sharedMaterial: {fileID: 7184219304488845399, guid: 389dbadeda6cfd04a94675e57acf4dab, type: 2}

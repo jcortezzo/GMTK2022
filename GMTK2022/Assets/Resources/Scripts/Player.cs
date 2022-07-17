@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
     void Swing()
     {
        
-        bool swingLeft = Input.GetKeyDown(KeyCode.Q);
-        bool swingRight = Input.GetKeyDown(KeyCode.E);
+        bool swingLeft = Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.J);
+        bool swingRight = Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.K);
         if (swingLeft || swingRight)
         {
             CameraShake.Instance.TriggerSakeRoutine(0.1f, 0.4f, 1);
