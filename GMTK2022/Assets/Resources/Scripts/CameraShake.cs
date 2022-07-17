@@ -11,17 +11,21 @@ public class CameraShake : MonoBehaviour
     private float shakeDuration = 0f;
 
     // A measure of magnitude for the shake. Tweak based on your preference
-    private float shakeMagnitude = 0.7f;
+    private const float shakeMagnitude = 0.7f;
 
     // A measure of how quickly the shake effect should evaporate
-    private float dampingSpeed = 1.0f;
+    private const float dampingSpeed = 1.0f;
 
     // The initial position of the GameObject
     Vector3 initialPosition;
 
+    private Coroutine shakeRoutine;
+
+    public static CameraShake Instance;
     // Start is called before the first frame update
     void Start()
     {
+        if (Instance == null) Instance = this;
         if (camTransform == null)
         {
             camTransform = Camera.main.transform;
@@ -51,5 +55,26 @@ public class CameraShake : MonoBehaviour
     public void TriggerShake(float shakeTime = 2.0f)
     {
         shakeDuration = shakeTime;
+    }
+
+    public void TriggerSakeRoutine(float duration, float shakeMagnitude = shakeMagnitude, float dampingSpeed = dampingSpeed)
+    {
+        if (shakeRoutine != null)
+        {
+            StopCoroutine(shakeRoutine);
+            transform.localPosition = initialPosition;
+        }
+        shakeRoutine = StartCoroutine(ShakeRoutine(duration, shakeMagnitude, dampingSpeed));
+    }
+    private IEnumerator ShakeRoutine(float duration, float shakeMagnitude, float dampingSpeed) 
+    {
+        float normalizedTime = 0;
+        while (normalizedTime <= 1f)
+        {
+            transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            normalizedTime += (Time.deltaTime / duration) * dampingSpeed;
+            yield return null;
+        }
+        transform.localPosition = initialPosition;
     }
 }

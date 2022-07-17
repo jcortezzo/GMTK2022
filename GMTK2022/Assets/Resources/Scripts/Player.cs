@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     {
         bumperZone = GetComponentInChildren<BumperZone>();
         rb = GetComponent<Rigidbody2D>();
+        bumperZone.GenerateBumperFormation(1);
     }
 
     // Update is called once per frame
@@ -59,10 +60,12 @@ public class Player : MonoBehaviour
 
     void Swing()
     {
+       
         bool swingLeft = Input.GetKeyDown(KeyCode.Q);
         bool swingRight = Input.GetKeyDown(KeyCode.E);
         if (swingLeft || swingRight)
         {
+            CameraShake.Instance.TriggerSakeRoutine(0.1f, 0.4f, 1);
             if (swingCoroutine == null)
             {
                 swingCoroutine = StartCoroutine(swingLeft ? RotateLeft(SwingSpeed) : RotateRight(SwingSpeed));
