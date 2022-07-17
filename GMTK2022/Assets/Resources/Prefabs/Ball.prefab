@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 2
+  minimumSpeed: 5
 --- !u!114 &2760346796242435383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,4 +165,4 @@ MonoBehaviour:
   - {x: 0.1, y: -0.100000024, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 56626
+  m_InstanceId: 59186

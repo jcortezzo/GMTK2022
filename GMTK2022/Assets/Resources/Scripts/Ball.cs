@@ -7,6 +7,9 @@ public class Ball : MonoBehaviour
     [field:SerializeField]
     public float Speed { get; private set; }
 
+    [SerializeField]
+    private float minimumSpeed;
+
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -19,6 +22,14 @@ public class Ball : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void FixedUpdate()
+    {
+        if (rb.velocity.magnitude < minimumSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * minimumSpeed;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
