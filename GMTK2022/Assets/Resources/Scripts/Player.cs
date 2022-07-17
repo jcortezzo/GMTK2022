@@ -19,12 +19,27 @@ public class Player : MonoBehaviour
     private Coroutine swingCoroutine;
     private bool isSwinging = false;
 
+    public GameObject topWall;
+    public GameObject bottomWall;
+    public GameObject leftWall;
+    public GameObject rightWall;
+
+    private float maxX;
+    private float minX;
+    private float maxY;
+    private float minY;
+
     // Start is called before the first frame update
     void Start()
     {
         bumperZone = GetComponentInChildren<BumperZone>();
         rb = GetComponent<Rigidbody2D>();
         bumperZone.GenerateBumperFormation(1);
+
+        maxX = rightWall.transform.position.x;
+        minX = leftWall.transform.position.x;
+        maxY = topWall.transform.position.y;
+        minY = bottomWall.transform.position.y;
     }
 
     // Update is called once per frame
@@ -54,6 +69,24 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
+        var currX = transform.position.x;
+        var currY = transform.position.y;
+        if (currX >= maxX)
+        {
+            horizontal = Mathf.Min(horizontal, 0);
+        }
+        else if (currX <= minX)
+        {
+            horizontal = Mathf.Max(horizontal, 0);
+        }
+        if (currY >= maxY)
+        {
+            vertical = Mathf.Min(vertical, 0);
+        }
+        else if (currY <= minY)
+        {
+            vertical = Mathf.Max(vertical, 0);
+        }
         Vector2 direction = new Vector2(horizontal, vertical).normalized;
         rb.velocity = Speed * direction;
     }
