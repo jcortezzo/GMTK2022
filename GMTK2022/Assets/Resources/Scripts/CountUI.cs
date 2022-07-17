@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CountUI : MonoBehaviour
 {
-    public TMP_Text text;
-
+    public TMP_Text currentBallText;
+    public TMP_Text maxBallText;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,7 @@ public class CountUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Balls " + GameCoordinator.Instance.currentBallCount.value;
+        currentBallText.text = "Balls " + GameCoordinator.Instance.currentBallCount.value;
+        maxBallText.text = "Max " + GameCoordinator.Instance.maxBallCount.value;
     }
 }

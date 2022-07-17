@@ -1,3 +1,4 @@
+using DigitalRuby.Tween;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class GameCoordinator : MonoBehaviour
     public FloatSO currentBallCount;
     public GameConfig gameConfig;
 
-
+    public BallShooter ballShooter;
     public StaminaBar staminaBar;
     public Player player;
     public CameraShake camShake;
@@ -23,6 +24,8 @@ public class GameCoordinator : MonoBehaviour
 
     public GameObject wallLeft;
     public GameObject goalPostLeft;
+
+    public ParticleSystem explosionGate;
 
     public DieUIController dieController;
     public int Lives { get; private set; }
@@ -49,7 +52,7 @@ public class GameCoordinator : MonoBehaviour
     {
         Jukebox.Instance.PlayMusic("mid_crush", timeElapsed);
         dieController.onRollCompleted.AddListener(ChangeDiceBumperAndUI);
-        dieController.updatePlayerDice += ChangeDiceBumperAndUI;
+        dieController.updatePlayerDice += ChangeBumperNoReset;
         currentBallCount.value = 0;
         maxBallCount.value = 0;
     }
@@ -145,13 +148,18 @@ public class GameCoordinator : MonoBehaviour
     public void SimulateRollDice()
     {
         dieController.AnimateDieRoll(3);
+        Jukebox.Instance.PlaySFX("roll_dice");
         //StartCoroutine(IESimulateRollDice(3));
     }
-
+    private void ChangeBumperNoReset(int num)
+    {
+        player.UpdateBumper(num);
+    }
     private void ChangeDiceBumperAndUI(int num)
     {
         player.UpdateBumper(num);
         staminaBar.Reset();
+        Jukebox.Instance.PlaySFX("roll_dice_finished");
     }
 
     private IEnumerator IESimulateRollDice(float duration)
@@ -185,36 +193,76 @@ public class GameCoordinator : MonoBehaviour
     private void StageRotate()
     {
         StartCoroutine(Rotate(outer.transform, rotateTime, 90));
+        Jukebox.Instance.PlaySFX("screen_rotate");
+        player.transform.rotation = Quaternion.identity;
     }
+
+    
 
     // Right side
     private void Stage5()
-    {
+    {   
+        camShake.TriggerSakeRoutine(0.1f, 0.7f, 1);
+        System.Action<ITween<Vector3>> updateScale = (t) =>
+        {
+            player.transform.localScale = t.CurrentValue;
+        };
         if (wallRight.activeSelf)
         {
+            Instantiate(explosionGate, wallRight.transform.position, Quaternion.identity).Play();
+            
+            ballShooter.resetTime = 1.5f;
+            Vector3 oldScale = player.transform.localScale;
+            Vector3 newScale = new Vector3(5, 5, 5);
+            player.gameObject.Tween("Scale up", oldScale, newScale, 0.75f, TweenScaleFunctions.CubicEaseIn, updateScale);
+
             wallRight.SetActive(false);
             goalPostRight.SetActive(true);
         } else
         {
+            // janky hardcoded number
+            ballShooter.resetTime = 1.5f;
+            Vector3 oldScale = player.transform.localScale;
+            Vector3 newScale = new Vector3(5, 5, 5);
+            player.gameObject.Tween("Scale down", oldScale, newScale, 0.75f, TweenScaleFunctions.CubicEaseIn, updateScale);
+
             wallRight.SetActive(true);
             goalPostRight.SetActive(false);
         }
-        
+        Jukebox.Instance.PlaySFX("score2");
     }
 
     // Left side
     private void Stage10()
     {
+        camShake.TriggerSakeRoutine(0.1f, 0.7f, 1);
+        System.Action<ITween<Vector3>> updateScale = (t) =>
+        {
+            player.transform.localScale = t.CurrentValue;
+        };
         if (wallLeft.activeSelf)
         {
+            Instantiate(explosionGate, wallLeft.transform.position, Quaternion.identity).Play();
+            ballShooter.resetTime = 0.75f;
+            Vector3 oldScale = player.transform.localScale;
+            Vector3 newScale = new Vector3(7, 7, 7);
+            player.gameObject.Tween("Scale up", oldScale, newScale, 0.75f, TweenScaleFunctions.CubicEaseIn, updateScale);
+
             wallLeft.SetActive(false);
             goalPostLeft.SetActive(true);
         } else
         {
+            // janky hardcoded number
+            ballShooter.resetTime = 3;
+            Vector3 oldScale = player.transform.localScale;
+            Vector3 newScale = new Vector3(2.5f, 2.5f, 2.5f);
+            player.gameObject.Tween("Scale down", oldScale, newScale, 0.75f, TweenScaleFunctions.CubicEaseIn, updateScale);
+
             wallLeft.SetActive(true);
             goalPostLeft.SetActive(false);
 
         }
-            
+        Jukebox.Instance.PlaySFX("score2");
     }
 }
+

@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Nguyen.unity
-    guid: ed32c7e51ff57b2449e29ecfb2211899
-  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: ff34ef97b7467d34c9fdb5e40e9bde79
+  - enabled: 1
+    path: Assets/Scenes/Nguyen.unity
+    guid: ed32c7e51ff57b2449e29ecfb2211899
   - enabled: 1
     path: Assets/Scenes/End.unity
     guid: 02116302ed7f77d4d85d4a444d298b17

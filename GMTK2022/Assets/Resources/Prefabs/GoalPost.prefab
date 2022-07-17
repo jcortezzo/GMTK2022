@@ -125,3 +125,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camShake: {fileID: 0}
+  fireExplode: {fileID: 7640268902847305159, guid: 6f784f271ca16f44a8d9d22da2283399, type: 3}

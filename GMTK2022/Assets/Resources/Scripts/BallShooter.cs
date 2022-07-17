@@ -8,7 +8,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField] private Transform target;
     [SerializeField] private float force;
 
-    [SerializeField] private float RESET_TIME;
+    public float resetTime;
     private float timeElapsed;
 
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class BallShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeElapsed >= RESET_TIME)
+        if(timeElapsed >= resetTime)
         {
             timeElapsed = 0;
             Kick();

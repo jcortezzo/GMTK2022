@@ -45,6 +45,7 @@ public class Ball : MonoBehaviour
                 {
                     rb.velocity = Vector2.zero;
                     rb.AddForce(bumper.BumpForce * point.normal.normalized, ForceMode2D.Impulse);
+                    Jukebox.Instance.PlaySFX("hit_ball");
                 }
             }
         }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class GoalPost : MonoBehaviour
 {
     public CameraShake camShake;
+    public ParticleSystem fireExplode;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class GoalPost : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Ball"))
         {
+            Jukebox.Instance.PlaySFX("goal");
+            Instantiate(fireExplode, collision.gameObject.transform.position, Quaternion.identity).Play();
             camShake.TriggerShake(0.2f);
             Destroy(collision.gameObject);
             if (GameCoordinator.Instance.currentBallCount.value > 0)
