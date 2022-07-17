@@ -7,6 +7,9 @@ public class GameCoordinator : MonoBehaviour
     public StaminaBar staminaBar;
     public Player player;
     public int Lives { get; private set; }
+
+    public float timeElapsed;
+    public const float TIME_CHANGE = 10;
     void Start()
     {
         
