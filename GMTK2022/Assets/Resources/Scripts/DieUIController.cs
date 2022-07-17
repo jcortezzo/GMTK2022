@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DieUIController : MonoBehaviour
 {
     private BumperZone bumperZone;
+
+
+    public UnityEvent onRollCompleted;
+
+    [SerializeField]
+    private float secondsBetweenRolls;
 
     // Start is called before the first frame update
     void Start()
@@ -25,5 +32,26 @@ public class DieUIController : MonoBehaviour
             }
         }
         if (n != 0) bumperZone.GenerateBumperFormation(n);
+        if (Input.GetKey(KeyCode.Alpha7)) AnimateDieRoll(3f);
+    }
+
+    public void AnimateDieRoll(float time)
+    {
+        StartCoroutine(IEAnimateDieRoll(time));
+    }
+
+    private IEnumerator IEAnimateDieRoll(float time)
+    {
+        for (; time > 0; time -= Time.deltaTime)
+        {
+            bumperZone.GenerateBumperFormation(RollDice.Roll());
+            yield return new WaitForSeconds(secondsBetweenRolls);
+        }
+        // event should invoke() the UI and the player
+        // to agree what face they should show, and facilitate
+        // some small animation to player (just like the UI
+        // and player glowing for a second or something) to
+        // signify the change
+        onRollCompleted.Invoke();
     }
 }
