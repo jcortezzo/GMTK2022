@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     public GameObject leftWall;
     public GameObject rightWall;
 
+    public int currentBumper;
+
     private float maxX;
     private float minX;
     private float maxY;
@@ -34,7 +36,9 @@ public class Player : MonoBehaviour
     {
         bumperZone = GetComponentInChildren<BumperZone>();
         rb = GetComponent<Rigidbody2D>();
+
         bumperZone.GenerateBumperFormation(1);
+        currentBumper = 1;
 
         maxX = rightWall.transform.position.x;
         minX = leftWall.transform.position.x;
@@ -45,16 +49,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int n = 0;
-        for (var key = KeyCode.Alpha1; key <= KeyCode.Alpha6; key++)
-        {
-            if (Input.GetKey(key))
-            {
-                n = key - KeyCode.Alpha1 + 1;
-                break;
-            }
-        }
-        if (n != 0) bumperZone.GenerateBumperFormation(n);
         Swing();
         Move();
     }
@@ -62,6 +56,7 @@ public class Player : MonoBehaviour
     public void UpdateBumper(int n)
     {
         bumperZone.GenerateBumperFormation(n);
+        currentBumper = n;
     }
 
 

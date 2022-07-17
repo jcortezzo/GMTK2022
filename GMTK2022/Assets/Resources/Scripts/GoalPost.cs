@@ -23,6 +23,10 @@ public class GoalPost : MonoBehaviour
         {
             camShake.TriggerShake(0.2f);
             Destroy(collision.gameObject);
+            if (GameCoordinator.Instance.currentBallCount.value > 0)
+            {
+                GameCoordinator.Instance.currentBallCount.value--;
+            }
         }
     }
 }

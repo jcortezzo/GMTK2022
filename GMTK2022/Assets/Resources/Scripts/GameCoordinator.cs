@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameCoordinator : MonoBehaviour
 {
+    public static GameCoordinator Instance;
+
+    public FloatSO maxBallCount;
+    public FloatSO currentBallCount;
+    public GameConfig gameConfig;
+
+
     public StaminaBar staminaBar;
     public Player player;
     public CameraShake camShake;
@@ -15,6 +23,8 @@ public class GameCoordinator : MonoBehaviour
 
     public GameObject wallLeft;
     public GameObject goalPostLeft;
+
+    public DieUIController dieController;
     public int Lives { get; private set; }
 
     public float rotateTime = 1f;
@@ -25,12 +35,28 @@ public class GameCoordinator : MonoBehaviour
     public int gameStage;
 
     public float stage5Time = 53.5f;
+    public float stage10Time = 100.5f;
+
+    private bool stage0FirstTime = true;
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
     void Start()
     {
-        Jukebox.Instance.PlayMusic("mid_crush");
+        Jukebox.Instance.PlayMusic("mid_crush", timeElapsed);
+        dieController.onRollCompleted.AddListener(ChangeDiceBumperAndUI);
+        dieController.updatePlayerDice += ChangeDiceBumperAndUI;
+        currentBallCount.value = 0;
+        maxBallCount.value = 0;
     }
 
     private int prevStage;
+    private float screenShakeTime;
+    private float TIME_SHAKE_MAX = 0.333f;
     // Update is called once per frame
     void Update()
     {
@@ -42,8 +68,26 @@ public class GameCoordinator : MonoBehaviour
         }
         timeElapsed += Time.deltaTime;
 
+        screenShakeTime += Time.deltaTime;
+        if(screenShakeTime >= TIME_SHAKE_MAX)
+        {
+            screenShakeTime = 0;
+            camShake.TriggerSakeRoutine(0.1f, 0.3f, 1);
+        }
+        
         int stage = CalculateStage();
         gameStage = stage;
+
+        if (prevStage != 0 && gameStage == 0)
+        {
+            // game looped
+            if (!gameConfig.InifiniteMode)
+            {
+                SceneManager.LoadScene("End");
+
+            }
+        }
+
 
         if (prevStage != stage)
         {
@@ -67,16 +111,26 @@ public class GameCoordinator : MonoBehaviour
 
     private int CalculateStage()
     {
-        if(gameStage == 4)
+        float currentSongTime = Jukebox.Instance.GetMusicCurrentAudioSource().time;
+        if (gameStage == 4)
         {
-            float deltaStage5 = timeElapsed - stage5Time;
+            float deltaStage5 = currentSongTime - stage5Time;
             if (Mathf.Abs(deltaStage5) < 0.01f)
             {
                 return 5;
             }
             return 4;
         }
-        return (int)(timeElapsed / TIME_CHANGE);
+        if (gameStage == 9)
+        {
+            float deltaStage5 = currentSongTime - stage10Time;
+            if (Mathf.Abs(deltaStage5) < 0.01f)
+            {
+                return 10;
+            }
+            return 9;
+        }
+        return (int)(currentSongTime / TIME_CHANGE);
     }
     public void Hurt()
     {
@@ -90,7 +144,14 @@ public class GameCoordinator : MonoBehaviour
 
     public void SimulateRollDice()
     {
-        StartCoroutine(IESimulateRollDice(3));
+        dieController.AnimateDieRoll(3);
+        //StartCoroutine(IESimulateRollDice(3));
+    }
+
+    private void ChangeDiceBumperAndUI(int num)
+    {
+        player.UpdateBumper(num);
+        staminaBar.Reset();
     }
 
     private IEnumerator IESimulateRollDice(float duration)
@@ -129,14 +190,31 @@ public class GameCoordinator : MonoBehaviour
     // Right side
     private void Stage5()
     {
-        wallRight.SetActive(false);
-        goalPostRight.SetActive(true);
+        if (wallRight.activeSelf)
+        {
+            wallRight.SetActive(false);
+            goalPostRight.SetActive(true);
+        } else
+        {
+            wallRight.SetActive(true);
+            goalPostRight.SetActive(false);
+        }
+        
     }
 
     // Left side
     private void Stage10()
     {
-        wallLeft.SetActive(false);
-        goalPostLeft.SetActive(true);
+        if (wallLeft.activeSelf)
+        {
+            wallLeft.SetActive(false);
+            goalPostLeft.SetActive(true);
+        } else
+        {
+            wallLeft.SetActive(true);
+            goalPostLeft.SetActive(false);
+
+        }
+            
     }
 }

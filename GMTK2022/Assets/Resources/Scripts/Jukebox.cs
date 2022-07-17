@@ -30,7 +30,11 @@ public class Jukebox : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void PlayMusic(string name)
+    public AudioSource GetMusicCurrentAudioSource()
+    {
+        return musicSource;
+    }
+    public void PlayMusic(string name, float time = 0)
     {
         foreach (Sound s in musics)
         {
@@ -40,6 +44,7 @@ public class Jukebox : MonoBehaviour
                 musicSource.volume = s.volume;
                 musicSource.pitch = s.pitch;
                 musicSource.loop = s.loop;
+                musicSource.time = time;
                 musicSource.Play();
                 return;
             }

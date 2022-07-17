@@ -10,7 +10,7 @@ public class BallShooter : MonoBehaviour
 
     [SerializeField] private float RESET_TIME;
     private float timeElapsed;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +34,8 @@ public class BallShooter : MonoBehaviour
         Ball ball = Instantiate(ballPrefab, this.transform.position, Quaternion.identity).GetComponent<Ball>();
         Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
         rb.AddForce(dir * force);
+        GameCoordinator.Instance.currentBallCount.value++;
+        GameCoordinator.Instance.maxBallCount.value = Mathf.Max(GameCoordinator.Instance.maxBallCount.value, GameCoordinator.Instance.currentBallCount.value);
     }
 
 }
