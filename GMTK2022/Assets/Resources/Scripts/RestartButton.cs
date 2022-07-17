@@ -21,7 +21,7 @@ public class RestartButton : MonoBehaviour
 
     public void Restart()
     {
-        config.InifiniteMode = true;
+        config.InifiniteMode = false;
         SceneManager.LoadScene("Nguyen");
     }
 

@@ -10,6 +10,8 @@ public class GameCoordinator : MonoBehaviour
 
     public FloatSO maxBallCount;
     public FloatSO currentBallCount;
+    public FloatSO ballGoalCount;
+
     public GameConfig gameConfig;
 
     public BallShooter ballShooter;
@@ -55,6 +57,7 @@ public class GameCoordinator : MonoBehaviour
         dieController.updatePlayerDice += ChangeBumperNoReset;
         currentBallCount.value = 0;
         maxBallCount.value = 0;
+        ballGoalCount.value = 0;
     }
 
     private int prevStage;

@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7565207624825608561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7565207624825608567}
+  - component: {fileID: 7565207624825608560}
+  m_Layer: 0
+  m_Name: JukeBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7565207624825608567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565207624825608561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1376767, y: 0.062405758, z: 0.09493595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7565207624825608560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565207624825608561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77e8a9784db1b1419f07ca0a1fed789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musics:
+  - clip: {fileID: 8300000, guid: 690a57c1ca3d55140864f01bc60daa01, type: 3}
+    name: mid_crush
+    volume: 0.6
+    pitch: 1
+    loop: 1
+  sfxs:
+  - clip: {fileID: 8300000, guid: 06d5b38700f19864d9b0b5ea35fed82a, type: 3}
+    name: screen_rotate
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: aa02de2d4076a854ab03a712a28bf38e, type: 3}
+    name: score2
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: 9993c6b68b10411448b1eacdb00a09f1, type: 3}
+    name: hit_ball
+    volume: 1
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: 1953b34e8132e884187a5e3bbaae4584, type: 3}
+    name: roll_dice
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: d93ce23041e69e14ca9516bdac98e163, type: 3}
+    name: roll_dice_finished
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - clip: {fileID: 8300000, guid: aabe4d2df0e159c40b7fc67a30794f85, type: 3}
+    name: goal
+    volume: 0.5
+    pitch: 1
+    loop: 0

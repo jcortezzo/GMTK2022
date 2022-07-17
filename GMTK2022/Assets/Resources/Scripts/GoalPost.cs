@@ -24,9 +24,12 @@ public class GoalPost : MonoBehaviour
         if(collision.gameObject.CompareTag("Ball"))
         {
             Jukebox.Instance.PlaySFX("goal");
-            Instantiate(fireExplode, collision.gameObject.transform.position, Quaternion.identity).Play();
+            ParticleSystem p = Instantiate(fireExplode, collision.gameObject.transform.position, Quaternion.identity);
+            p.Play();
+            Destroy(p.gameObject, 5f);
             camShake.TriggerShake(0.2f);
             Destroy(collision.gameObject);
+            GameCoordinator.Instance.ballGoalCount.value++;
             if (GameCoordinator.Instance.currentBallCount.value > 0)
             {
                 GameCoordinator.Instance.currentBallCount.value--;
