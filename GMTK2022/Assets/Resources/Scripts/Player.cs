@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(horizontal, vertical).normalized;
-        rb.velocity = Speed * Time.deltaTime * direction;
+        rb.velocity = Speed * direction;
     }
 
     void Swing()
